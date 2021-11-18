@@ -11,7 +11,9 @@ function App() {
     <Router>
     <div className="container">
        <div className="navbar">
-          <div><Link to = "/">Home</Link></div>
+       <div className="dropdown">
+          <button className="dropdownButton"><Link to = "/">Home</Link></button>
+        </div>
           <div className="dropdown">
             <button className="dropdownButton">Properties </button>
             <div className="dropdown-content">
@@ -24,20 +26,20 @@ function App() {
           <div className="dropdown">
             <button className="dropdownButton">Agents</button>
             <div class="dropdown-content">
-              <Link to = "/Agents/all">Browse all</Link>
-              <Link to = "/Agents/search">Find Agent</Link>
+              <Link to = "/agents/all">Browse all</Link>
+              <Link to = "/agents/search">Find Agent</Link>
             </div>
           </div>
       </div>
       <div className="content">
         <Routes>
         <Route path="/" exact element={<Homepage />} />
-        <Route path="/Properties/all" element={<PropertiesAll />} />
-        <Route path="/Properties/sale" element={<PropertiesSale />} />
-        <Route path="/Properties/rent" element={<PropertiesRent />} />
-        <Route path="/Properties/search" element={<PropertiesSearch />} />
-        <Route path="/Agents/all" element={<AgentsAll />} />
-        <Route path="/Agents/search" element={<AgentsSearch />} />
+        <Route path="/properties/all" element={<PropertiesAll />} />
+        <Route path="/properties/sale" element={<PropertiesSale />} />
+        <Route path="/properties/rent" element={<PropertiesRent />} />
+        <Route path="/properties/search" element={<PropertiesSearch />} />
+        <Route path="/agents/all" element={<AgentsAll />} />
+        <Route path="/agents/search" element={<AgentsSearch />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

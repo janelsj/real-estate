@@ -18,25 +18,23 @@
   background-color: lightcyan;
 }
 
-.navbar>div{
-  padding: 10px;
-}
-
 .dropdown {
   float: left;
   overflow: hidden;
 }
 
-.dropdown .dropdownButton {
+.navbar>button, .dropdown, .dropdownButton {
   border: none;
   outline: none;
+  font-size: large;
+  font-weight: bold;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropdownButton {
+.dropdown:hover .dropdownButton {
   background-color: lightskyblue;
 }
 
@@ -79,7 +77,7 @@
 a {
   text-decoration: none;
   color: black;
-  font-weight: bolder;
+  font-weight: inherit;
 }
 
 a:hover, a:focus {
