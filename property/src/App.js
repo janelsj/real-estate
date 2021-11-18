@@ -13,12 +13,12 @@ function App() {
        <div className="navbar">
           <div><Link to = "/">Home</Link></div>
           <div className="dropdown">
-            <button className="dropdownButton">Properties</button>
-            <div class="dropdown-content">
-              <Link to = "/Properties/all">Browse all</Link>
-              <Link to = "/Properties/sale">For sale</Link>
-              <Link to = "/Properties/rent">For rent</Link>
-              <Link to = "/Properties/search">Search properties</Link>
+            <button className="dropdownButton">Properties </button>
+            <div className="dropdown-content">
+              <Link to = "/properties/all">Browse all</Link>
+              <Link to = "/properties/sale">For sale</Link>
+              <Link to = "/properties/rent">For rent</Link>
+              <Link to = "/properties/search">Search properties</Link>
             </div>
           </div>
           <div className="dropdown">
