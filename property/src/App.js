@@ -25,7 +25,7 @@ function App() {
           </div>
           <div className="dropdown">
             <button className="dropdownButton">Agents</button>
-            <div class="dropdown-content">
+            <div className="dropdown-content">
               <Link to = "/agents/all">Browse all</Link>
               <Link to = "/agents/search">Find Agent</Link>
             </div>
