@@ -1,0 +1,20 @@
+#propertiesAll{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-auto-flow: row;
+    grid-gap: 10px 0px;
+    padding: 10px 10px;
+}
+
+.eachProperty-dataBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: space-around;
+    margin: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
