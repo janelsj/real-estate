@@ -15,7 +15,6 @@
 1. Express and Middleware
 1. Sequelize
 1. Database deployment to Heroku (database dialect add-on: Postgres)
-1. React JS user interface library, including react routers
 
 ## Webpage:
 Source code from this repository has been deployed to [https://janelsj.github.io/real-estate/](https://janelsj.github.io/real-estate/).
