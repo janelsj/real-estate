@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70%;
+  padding: 40px;
   background-color: blanchedalmond;
 }
 
@@ -66,9 +67,12 @@
 
 .content {
   padding: 20px;
-  min-height: 70vh;
+  height: 70vh;
   width: 60vw;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow-y: scroll;
   border: 2px solid gray;
   background-color: white;
