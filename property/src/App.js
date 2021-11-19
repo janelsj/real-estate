@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import PropertiesAll from './components/property/Properties-all';
 import {PropertiesSearch, PropertiesSale, PropertiesRent} from './components/property/Properties-SearchSaleRent';
 import Homepage from './components/Homepage';
-import {AgentsAll, AgentsSearch} from './components/agent/Agents';
+import {AgentsAll, AgentsSearch, Agent} from './components/agent/Agents';
 import NotFoundPage from './components/NotFoundPage';
 import './App.css';
 
@@ -40,6 +40,7 @@ function App() {
         <Route path="/properties/search" element={<PropertiesSearch />} />
         <Route path="/agents/all" element={<AgentsAll />} />
         <Route path="/agents/search" element={<AgentsSearch />} />
+        <Route path="/agents/id/:id" element={<Agent />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
