@@ -44,7 +44,7 @@ export function AgentsAll(){
                 {agentsList.map(item => {
                     return (<div className="eachAgent-dataBox" key={nanoid()}>
                         <ul key={nanoid()}>
-                            <li key={nanoid()}>{item.fullName}</li>
+                            <li key={nanoid()}><b>{item.fullName}</b></li>
                             <li key={nanoid()}>{item.contactNo}</li>
                             <li key={nanoid()}>{item.email}</li>
                             <li key={nanoid()}><Link to = {`/agents/id/${item.id}`}>See detailed profile</Link></li>
@@ -170,11 +170,11 @@ export function Agent(){
         region: '',
     });
     const [isAPILoaded, setIsAPILoaded] = useState(false);
-    let {id} = useParams();
+    let {agentId} = useParams();
 
     useEffect(()=>{
         /* Get data for webpage from API*/
-        API.get(`/general/agent/id/${id}`).then(response => {
+        API.get(`/general/agent/id/${agentId}`).then(response => {
             const agentData = {
                 fullName: response.data.data.fullName,
                 contactNo: response.data.data.contactNo,
