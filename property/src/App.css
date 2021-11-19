@@ -80,12 +80,28 @@
 
 a {
   text-decoration: none;
-  color: black;
   font-weight: inherit;
 }
 
 a:hover, a:focus {
   text-decoration: underline;
-  color: dimgray;
   font-style: italic;
+}
+
+.navbar a {
+  color: black;
+}
+
+.navbar a:hover, .navbar a:focus {
+  color: dimgray;
+}
+
+.content a {
+  color: blue;
+  font-weight: 500;
+}
+
+.content a:hover, .content a:focus {
+  color: navy;
+  font-weight: 500;
 }
