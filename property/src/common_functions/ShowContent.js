@@ -13,7 +13,7 @@ function Content({isLoaded, dataToShow}){
   return(<div className="graph">
     {isLoaded ? 
         dataToShow
-        : <ScaleLoader color='blue' loading={!isLoaded} css={override} height={70} width={10} radius={30} margin={5}/>
+        : <ScaleLoader color='gray' loading={!isLoaded} css={override} height={70} width={10} radius={30} margin={5}/>
       }
     </div>)
 }

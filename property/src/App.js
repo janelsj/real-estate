@@ -12,7 +12,7 @@ function App() {
     <div className="container">
        <div className="navbar">
        <div className="dropdown">
-          <button className="dropdownButton"><Link to = "/">Home</Link></button>
+          <button className="dropdownButton"><Link to = "/real-estate">Home</Link></button>
         </div>
           <div className="dropdown">
             <button className="dropdownButton">Properties </button>
@@ -33,7 +33,7 @@ function App() {
       </div>
       <div className="content">
         <Routes>
-        <Route path="/" exact element={<Homepage />} />
+        <Route path="/real-estate" element={<Homepage />} />
         <Route path="/properties/all" element={<PropertiesAll />} />
         <Route path="/properties/sale" element={<PropertiesSale />} />
         <Route path="/properties/rent" element={<PropertiesRent />} />
