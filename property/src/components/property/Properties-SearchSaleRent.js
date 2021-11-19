@@ -34,25 +34,60 @@ export function PropertiesSale(){
  
          return ( 
              <div className = "propertiesSale" >
-             <h2>List of properties for sale</h2>
+             <h2>Properties for Sale</h2>
                  {propertiesSaleArray.map(properties =>
                  <ul key={properties.id}>
                     <li><b>{properties.location}</b></li>
-                    <li>Price: ${properties.price}</li>
-                    <li>{properties.noOfBedrooms} bedrooms</li>
+                    <li>${properties.price}</li>
+                    <li>{properties.noOfBedrooms} bedrooms, {properties.sizeInSqFt} sqft</li>
                  </ul>
                  )}
              </div>
          );  
      } else {
          return(<>
-             <h2>There is no properties listed for sale.</h2>
+             <h2>There is no properties for sale.</h2>
          </>)
      }  
 };
 
 export function PropertiesRent(){
-    return(<>
-        <h2>This is content for all properties listed for rent.</h2>
-    </>)
+    const [propertiesRent, setPropertiesRent] = useState('');
+    const [isAPILoaded, setIsAPILoaded] = useState(false);
+    let propertiesRentArray = [];
+
+    useEffect(() => {
+        API.get('/general/properties/search/isSale/true')
+        .then((response) => {
+            const propertiesRentData = response.data.data;
+            setPropertiesRent(propertiesRentData);
+        })
+        .catch(error => console.error(`Error: ${error}`));
+
+        return () => setIsAPILoaded(false);
+
+    }, []);
+
+    propertiesRentArray = propertiesRent;
+
+    if (propertiesRentArray.length > 0) {
+        console.log(propertiesRentArray);
+ 
+         return ( 
+             <div className = "propertiesRent" >
+             <h2>Properties for Rent</h2>
+                 {propertiesRentArray.map(properties =>
+                 <ul key={properties.id}>
+                    <li><b>{properties.location}</b></li>
+                    <li>${properties.price}</li>
+                    <li>{properties.noOfBedrooms} bedrooms, {properties.sizeInSqFt} sqft</li>
+                 </ul>
+                 )}
+             </div>
+         );  
+     } else {
+         return(<>
+             <h2>There is no properties for Rent.</h2>
+         </>)
+     }  
 };
