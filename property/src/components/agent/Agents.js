@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react';
 import {nanoid} from 'nanoid';
 import API from '../../common_functions/API';
 import Content from '../../common_functions/ShowContent';
-import {BrowserRouter as Router, Link, Route, Routes, useParams} from 'react-router-dom';
+import DropdownListMaker from '../../common_functions/dropdown-list-maker';
+import {Link, useParams} from 'react-router-dom';
 import './agent.css';
 
 export function AgentsAll(){
@@ -58,9 +59,101 @@ export function AgentsAll(){
     </>)
 };
 
-export function AgentsSearch({searchParameter}){
+export function AgentsSearch(){
+
+    const [region, setRegion] = useState('');
+    const [specialty, setSpecialty] = useState('');
+    const [agentsList, setAgentsList] = useState([]);
+    const [isAPILoaded, setIsAPILoaded] = useState(false);
+
+    useEffect(()=>{     
+        let agentsArray = [];
+
+        if(region !== ""){
+             /* Get data for webpage from API*/
+            API.get(`/general/agent/region/${region}`).then(response => {
+                for(let eachAgent of response.data.data){
+                    const agentData = {
+                        id: eachAgent.id,
+                        fullName: eachAgent.fullName,
+                        contactNo: eachAgent.contactNo,
+                        email: eachAgent.email,
+                        specialty: eachAgent.specialty,
+                    };
+                    agentsArray.push(agentData);
+                }
+                // console.log(agentsArray);
+                setAgentsList(agentsArray);
+                setIsAPILoaded(true);
+                }
+            );
+        } else if (specialty !== "") {
+            /* Get data for webpage from API*/
+            API.get(`/general/agent/specialty/${specialty}`).then(response => {
+                for(let eachAgent of response.data.data){
+                    const agentData = {
+                        id: eachAgent.id,
+                        fullName: eachAgent.fullName,
+                        contactNo: eachAgent.contactNo,
+                        email: eachAgent.email,
+                        region: eachAgent.region,
+                    };
+                    agentsArray.push(agentData);
+                }
+                // console.log(agentsArray);
+                setAgentsList(agentsArray);
+                setIsAPILoaded(true);
+                }
+            );
+        }
+
+        return () => setIsAPILoaded(false);
+
+    },[region, specialty]);
+
     return(<>
-        <h2>This is content for finding specific agent.</h2>
+        <div className="title">
+            <h2>All agents</h2>
+        </div>
+        <div className="selection">
+            <label htmlFor="region">Choose region:</label>
+            <select name="region" value={region} onChange={e => setRegion(e.target.options[e.target.selectedIndex].value)}>
+                <DropdownListMaker searchBy='region'/>
+            </select><br/>
+            <label htmlFor="specialty">Choose property type:</label>
+            <select name="specialty" value={specialty} onChange={e => setSpecialty(e.target.options[e.target.selectedIndex].value)}>
+                <DropdownListMaker searchBy='specialty'/>
+            </select> 
+        </div>
+        {(region === "" && specialty === "") ? 
+        <Content 
+        dataToShow={
+          <div id="agent">
+              <h3>Please make a selection.</h3>
+          </div>
+          }
+        isLoaded="true"
+      />
+        : <Content 
+          dataToShow={
+            <div id="agent">
+                {agentsList.map(item => {
+                    return (<div className="eachAgent-dataBox" key={nanoid()}>
+                        <ul key={nanoid()}>
+                            <li key={nanoid()}><b>{item.fullName}</b></li>
+                            <li key={nanoid()}>{item.contactNo}</li>
+                            <li key={nanoid()}>{item.email}</li>
+                            <li key={nanoid()}>{item.specialty ? `Specializes in: ${item.specialty} properties`:`In charge of: ${item.region} region`}</li>
+                            <li key={nanoid()}><Link to = {`/agents/id/${item.id}`}>See detailed profile</Link></li>
+                        </ul>
+                    </div>
+                    )
+                })}
+            </div>
+            }
+          isLoaded={isAPILoaded}
+        />
+    } 
     </>)
 };
 
@@ -106,7 +199,8 @@ export function Agent(){
                     <li key={nanoid()}><b>Email:</b> {agent.email}</li>
                     <li key={nanoid()}><b>Specializes in:</b> {agent.specialty} properties</li>
                     <li key={nanoid()}><b>In charge of:</b> {agent.region} region</li>
-                    <li key={nanoid()}><Link to = "/agents/all">Back to agents list</Link></li>
+                    <li key={nanoid()}><Link to = "/agents/search">Back to: Find agent</Link></li>
+                    <li key={nanoid()}><Link to = "/agents/all">Back to: All agents</Link></li>
                 </ul>
             </div>
             }
