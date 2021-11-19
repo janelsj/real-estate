@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../common_functions/API';
+import Content from '../../common_functions/ShowContent';
 import './property.css';
 
 export function PropertiesSearch({searchParameter}){
@@ -11,6 +12,7 @@ export function PropertiesSearch({searchParameter}){
 
 export function PropertiesSale(){
     const [propertiesSale, setPropertiesSale] = useState('');
+    const [isAPILoaded, setIsAPILoaded] = useState(false);
     let propertiesSaleArray = [];
 
     useEffect(() => {
@@ -20,30 +22,45 @@ export function PropertiesSale(){
             setPropertiesSale(propertiesSaleData);
         })
         .catch(error => console.error(`Error: ${error}`));
+
+        return () => setIsAPILoaded(false);
+
     }, []);
 
     propertiesSaleArray = propertiesSale;
 
-    if (propertiesSaleArray.length > 0) {
-       console.log(propertiesSaleArray);
-
-        return ( 
-            <div className = "propertiesSale" >
-            <h2>List of properties for sale</h2>
-                {propertiesSaleArray.map(properties =>
-                <ul key={properties.id}>
-                   <li><b>{properties.location}</b></li>
-                   <li>Price: ${properties.price}</li>
-                   <li>{properties.noOfBedrooms} bedrooms</li>
-                </ul>
-                )}
+    return (<>
+        <div className="title">
+        <h1>Properties for sale</h1>
+        </div>
+       {(propertiesSaleArray.length>0) ? 
+        <Content 
+            dataToShow={
+                <div className = "propertiesSale" > 
+                {propertiesSaleArray.map(properties => {
+                    <div className="eachProperty-dataBox" key={nanoid()}>
+                    <ul key={properties.id}>
+                       <li><b>{properties.location}</b></li>
+                       <li>Price: ${properties.price}</li>
+                       <li>{properties.noOfBedrooms} bedrooms</li>
+                    </ul>
+                    </div>
+                })}
+                </div>
+            }
+            isLoaded={isAPILoaded}
+          />
+        :
+        <Content 
+        dataToShow={
+            <div className = "propertiesSale" > 
+            <h3>There is no properties listed for sale.</h3>
             </div>
-        );  
-    } else {
-        return(<>
-            <h2>There is no properties listed for sale.</h2>
-        </>)
-    }  
+        }
+        isLoaded={isAPILoaded}
+      />
+        }
+    </>);
 };
 
 export function PropertiesRent(){
