@@ -1,5 +1,6 @@
 import {BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
 import PropertiesAll from './components/property/Properties-all';
+import Property from './components/property/Property-individual';
 import {PropertiesSearch, PropertiesSale, PropertiesRent} from './components/property/Properties-SearchSaleRent';
 import Homepage from './components/Homepage';
 import {AgentsAll, AgentsSearch, Agent} from './components/agent/Agents';
@@ -38,9 +39,10 @@ function App() {
         <Route path="/properties/sale" element={<PropertiesSale />} />
         <Route path="/properties/rent" element={<PropertiesRent />} />
         <Route path="/properties/search" element={<PropertiesSearch />} />
+        <Route path="/properties/id/:propertyId" element={<Property />} />
         <Route path="/agents/all" element={<AgentsAll />} />
         <Route path="/agents/search" element={<AgentsSearch />} />
-        <Route path="/agents/id/:id" element={<Agent />} />
+        <Route path="/agents/id/:agentId" element={<Agent />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

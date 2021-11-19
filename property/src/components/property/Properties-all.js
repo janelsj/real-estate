@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {nanoid} from 'nanoid';
 import API from '../../common_functions/API';
 import Content from '../../common_functions/ShowContent';
+import {Link} from 'react-router-dom';
 import './property.css';
 
 function PropertiesAll(){
@@ -15,6 +16,7 @@ function PropertiesAll(){
         API.get('/general/properties/all').then(response => {
             for(let eachProperty of response.data.data){
                 const propertyData = {
+                    id: eachProperty.id,
                     price: eachProperty.price,
                     location: eachProperty.location,
                     bedrooms: eachProperty.noOfBedrooms,
@@ -24,7 +26,7 @@ function PropertiesAll(){
                 };
                 propertiesArray.push(propertyData);
             }
-            console.log(propertiesArray);
+            // console.log(propertiesArray);
             setPropertiesList(propertiesArray);
             setIsAPILoaded(true);
             }
@@ -49,6 +51,7 @@ function PropertiesAll(){
                             <li key={nanoid()}>No. of Bedrooms: {item.bedrooms}</li>
                             <li key={nanoid()}>Size: {item.size} square ft</li>
                             <li key={nanoid()}>{item.sale ? 'For sale':'For rent'}</li>
+                            <li key={nanoid()}><Link to={`/properties/id/${item.id}`}>See more details</Link></li>
                         </ul>
                     </div>
                     )
