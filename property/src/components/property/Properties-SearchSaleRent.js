@@ -38,7 +38,7 @@ export function PropertiesSale(){
             dataToShow={
                 <div className = "propertiesSale" > 
                 {propertiesSaleArray.map(properties => {
-                    <div className="eachProperty-dataBox" key={nanoid()}>
+                    <div className="eachProperty-dataBox">
                     <ul key={properties.id}>
                        <li><b>{properties.location}</b></li>
                        <li>Price: ${properties.price}</li>
