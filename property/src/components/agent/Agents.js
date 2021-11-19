@@ -82,7 +82,6 @@ export function AgentsSearch(){
                     };
                     agentsArray.push(agentData);
                 }
-                // console.log(agentsArray);
                 setAgentsList(agentsArray);
                 setIsAPILoaded(true);
                 }
@@ -100,7 +99,6 @@ export function AgentsSearch(){
                     };
                     agentsArray.push(agentData);
                 }
-                // console.log(agentsArray);
                 setAgentsList(agentsArray);
                 setIsAPILoaded(true);
                 }
@@ -113,15 +111,21 @@ export function AgentsSearch(){
 
     return(<>
         <div className="title">
-            <h2>All agents</h2>
+            <h2>Agents</h2>
         </div>
         <div className="selection">
             <label htmlFor="region">Choose region:</label>
-            <select name="region" value={region} onChange={e => setRegion(e.target.options[e.target.selectedIndex].value)}>
+            <select name="region" value={region} onChange={e => {
+                setRegion(e.target.options[e.target.selectedIndex].value);
+                setSpecialty("");
+                }}>
                 <DropdownListMaker searchBy='region'/>
             </select><br/>
             <label htmlFor="specialty">Choose property type:</label>
-            <select name="specialty" value={specialty} onChange={e => setSpecialty(e.target.options[e.target.selectedIndex].value)}>
+            <select name="specialty" value={specialty} onChange={e => {
+                setSpecialty(e.target.options[e.target.selectedIndex].value);
+                setRegion("");
+            }}>
                 <DropdownListMaker searchBy='specialty'/>
             </select> 
         </div>
