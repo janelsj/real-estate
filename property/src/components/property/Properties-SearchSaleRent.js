@@ -29,7 +29,7 @@ export function PropertiesSale(){
 
         return ( 
             <div className = "propertiesSale" >
-            <h2>List of properties for sale</h2>
+            <h2>Properties for Sale</h2>
                 {propertiesSaleArray.map(properties =>
                 <ul key={properties.id}>
                    <li><b>{properties.location}</b></li>
@@ -41,13 +41,44 @@ export function PropertiesSale(){
         );  
     } else {
         return(<>
-            <h2>There is no properties listed for sale.</h2>
+            <h2>There is no properties for sale.</h2>
         </>)
     }  
 };
 
 export function PropertiesRent(){
-    return(<>
-        <h2>This is content for all properties listed for rent.</h2>
-    </>)
+    const [propertiesRent, setPropertiesRent] = useState('');
+    let propertiesRentArray = [];
+
+    useEffect(() => {
+        API.get('/general/properties/search/isRent/true')
+        .then((response) => {
+            const propertiesRentData = response.data.data;
+            setPropertiesRent(propertiesRentData);
+        })
+        .catch(error => console.error(`Error: ${error}`));
+    }, []);
+
+    propertiesRentArray = propertiesRent;
+
+    if (propertiesRentArray.length > 0) {
+       console.log(propertiesRentArray);
+
+        return ( 
+            <div className = "propertiesSale" >
+            <h2>Properties for Rent</h2>
+                {propertiesRentArray.map(properties =>
+                <ul key={properties.id}>
+                   <li><b>{properties.location}</b></li>
+                   <li>Price: ${properties.price}</li>
+                   <li>{properties.noOfBedrooms} bedrooms</li>
+                </ul>
+                )}
+            </div>
+        );  
+    } else {
+        return(<>
+            <h2>There is no properties for rent.</h2>
+        </>)
+    }  
 };
