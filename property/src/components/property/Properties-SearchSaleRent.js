@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../common_functions/API';
+import Content from '../../common_functions/ShowContent';
 import './property.css';
 
 export function PropertiesSearch({searchParameter}){
@@ -11,6 +12,7 @@ export function PropertiesSearch({searchParameter}){
 
 export function PropertiesSale(){
     const [propertiesSale, setPropertiesSale] = useState('');
+    const [isAPILoaded, setIsAPILoaded] = useState(false);
     let propertiesSaleArray = [];
 
     useEffect(() => {
@@ -20,65 +22,37 @@ export function PropertiesSale(){
             setPropertiesSale(propertiesSaleData);
         })
         .catch(error => console.error(`Error: ${error}`));
+
+        return () => setIsAPILoaded(false);
+
     }, []);
 
     propertiesSaleArray = propertiesSale;
 
     if (propertiesSaleArray.length > 0) {
-       console.log(propertiesSaleArray);
-
-        return ( 
-            <div className = "propertiesSale" >
-            <h2>Properties for Sale</h2>
-                {propertiesSaleArray.map(properties =>
-                <ul key={properties.id}>
-                   <li><b>{properties.location}</b></li>
-                   <li>Price: ${properties.price}</li>
-                   <li>{properties.noOfBedrooms} bedrooms</li>
-                </ul>
-                )}
-            </div>
-        );  
-    } else {
-        return(<>
-            <h2>There is no properties for sale.</h2>
-        </>)
-    }  
+        console.log(propertiesSaleArray);
+ 
+         return ( 
+             <div className = "propertiesSale" >
+             <h2>List of properties for sale</h2>
+                 {propertiesSaleArray.map(properties =>
+                 <ul key={properties.id}>
+                    <li><b>{properties.location}</b></li>
+                    <li>Price: ${properties.price}</li>
+                    <li>{properties.noOfBedrooms} bedrooms</li>
+                 </ul>
+                 )}
+             </div>
+         );  
+     } else {
+         return(<>
+             <h2>There is no properties listed for sale.</h2>
+         </>)
+     }  
 };
 
 export function PropertiesRent(){
-    const [propertiesRent, setPropertiesRent] = useState('');
-    let propertiesRentArray = [];
-
-    useEffect(() => {
-        API.get('/general/properties/search/isRent/true')
-        .then((response) => {
-            const propertiesRentData = response.data.data;
-            setPropertiesRent(propertiesRentData);
-        })
-        .catch(error => console.error(`Error: ${error}`));
-    }, []);
-
-    propertiesRentArray = propertiesRent;
-
-    if (propertiesRentArray.length > 0) {
-       console.log(propertiesRentArray);
-
-        return ( 
-            <div className = "propertiesSale" >
-            <h2>Properties for Rent</h2>
-                {propertiesRentArray.map(properties =>
-                <ul key={properties.id}>
-                   <li><b>{properties.location}</b></li>
-                   <li>Price: ${properties.price}</li>
-                   <li>{properties.noOfBedrooms} bedrooms</li>
-                </ul>
-                )}
-            </div>
-        );  
-    } else {
-        return(<>
-            <h2>There is no properties for rent.</h2>
-        </>)
-    }  
+    return(<>
+        <h2>This is content for all properties listed for rent.</h2>
+    </>)
 };
